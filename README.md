@@ -1,1 +1,1 @@
-"# JavaDesignPatterns-Mediator"
+# JavaDesignPatterns-Mediator
