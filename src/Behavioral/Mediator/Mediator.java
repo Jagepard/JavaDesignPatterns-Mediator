@@ -14,13 +14,17 @@ public class Mediator implements MediatorInterface {
 
     @Override
     public void addListener(String name, Listener listener, String methodName) {
+        if (listeners.containsKey(name) && events.containsKey(name)) {
+            throw new IllegalArgumentException(name + " already exists");
+        }
+
         listeners.put(name, listener);
         events.put(name, methodName);
     }
 
     @Override
     public void notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        if (listeners.containsKey(name)) {
+        if (listeners.containsKey(name) && events.containsKey(name)) {
             Listener listener = listeners.get(name);
             String methodName = events.get(name);
 
