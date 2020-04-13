@@ -6,6 +6,7 @@
 package Behavioral.Mediator;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 
 public class Mediator implements MediatorInterface {
@@ -28,7 +29,14 @@ public class Mediator implements MediatorInterface {
             Listener listener = listeners.get(name);
             String methodName = events.get(name);
 
-            listener.getClass().getMethod(methodName).invoke(listener, null);
+            if (handler == null) {
+                Method method = listener.getClass().getMethod(methodName);
+                method.invoke(listener);
+                return;
+            }
+
+            Method method = listener.getClass().getMethod(methodName, HandlerInterface.class);
+            method.invoke(listener, handler);
         }
     }
 }
