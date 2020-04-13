@@ -6,8 +6,9 @@
 package Behavioral.Mediator;
 
 public class Colleague3 extends Listener {
-    public void onEvent()
+    public void onEvent(HandlerInterface handler)
     {
-        System.out.printf("%s\n", "Colleague3: reacts on notify");
+        handler.setMessage("Colleague3");
+        System.out.printf("%s%s\n", handler.getMessage(), ": reacts on notify");
     }
 }
