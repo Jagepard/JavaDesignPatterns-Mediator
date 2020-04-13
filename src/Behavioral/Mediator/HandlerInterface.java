@@ -5,4 +5,7 @@
 
 package Behavioral.Mediator;
 
-public interface HandlerInterface {}
+public interface HandlerInterface {
+    void setMessage(String message);
+    String getMessage();
+}
