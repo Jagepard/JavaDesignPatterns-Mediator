@@ -11,7 +11,7 @@ public interface MediatorInterface {
     /**
      * @param listener
      */
-    void addListener(String name, Listener listener, String methodName);
+    void addListener(String name, ListenerInterface listener, String methodName);
 
     /**
      * @param name

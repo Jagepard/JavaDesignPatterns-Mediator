@@ -10,11 +10,11 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 
 public class Mediator implements MediatorInterface {
-    LinkedHashMap<String, Listener> listeners = new LinkedHashMap<>();
+    LinkedHashMap<String, ListenerInterface> listeners = new LinkedHashMap<>();
     LinkedHashMap<String, String> events = new LinkedHashMap<>();
 
     @Override
-    public void addListener(String name, Listener listener, String methodName) {
+    public void addListener(String name, ListenerInterface listener, String methodName) {
         if (listeners.containsKey(name) && events.containsKey(name)) {
             throw new IllegalArgumentException(name + " already exists");
         }
@@ -26,7 +26,7 @@ public class Mediator implements MediatorInterface {
     @Override
     public void notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         if (listeners.containsKey(name) && events.containsKey(name)) {
-            Listener listener = listeners.get(name);
+            ListenerInterface listener = listeners.get(name);
             String methodName = events.get(name);
 
             if (handler == null) {
