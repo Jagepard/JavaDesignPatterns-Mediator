@@ -5,7 +5,7 @@
 
 package Behavioral.Mediator;
 
-public class Colleague2 extends Listener {
+public class Colleague2 implements ListenerInterface {
     public void onEvent(HandlerInterface handler)
     {
         handler.setMessage("Colleague2");
