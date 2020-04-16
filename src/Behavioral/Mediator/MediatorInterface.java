@@ -10,8 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 public interface MediatorInterface {
     /**
      * @param listener
+     * @param methodToCall
      */
-    void addListener(String name, ListenerInterface listener, String methodName);
+    void addListener(AbstractListener listener, String methodToCall);
 
     /**
      * @param name
