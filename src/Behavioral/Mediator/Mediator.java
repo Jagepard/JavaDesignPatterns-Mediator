@@ -25,12 +25,14 @@ public class Mediator implements MediatorInterface {
     }
 
     @Override
-    public void notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public String notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         if (listeners.containsKey(name) && events.containsKey(name)) {
             AbstractListener listener = listeners.get(name);
             String methodName = events.get(name);
             Method method = listener.getClass().getMethod(methodName, HandlerInterface.class);
-            method.invoke(listener, handler);
+            return (String) method.invoke(listener, handler);
         }
+
+        return null;
     }
 }
