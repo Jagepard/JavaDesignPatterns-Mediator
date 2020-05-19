@@ -18,5 +18,5 @@ public interface MediatorInterface {
      * @param name
      * @param handler
      */
-    void notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+    String notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 }
