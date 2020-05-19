@@ -5,8 +5,10 @@
 
 package Behavioral.Mediator;
 
-public class Main {
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
+public class Main {
     public static void main(String[] args) throws Exception {
         HandlerInterface handler   = new Handler();
         MediatorInterface mediator = new Mediator();
@@ -18,11 +20,18 @@ public class Main {
             mediator.addListener(listener1, "onEvent");
             mediator.addListener(listener2, "onEvent");
             mediator.addListener(listener3, "onEvent");
-            listener1.toGreet(listener2.getClass().getName(), mediator, handler);
-            listener2.toGreet(listener3.getClass().getName(), mediator, handler);
-            listener3.toGreet(listener1.getClass().getName(), mediator, handler);
+
+            handShake(handler, mediator, listener1, listener2);
+            handShake(handler, mediator, listener2, listener3);
+            handShake(handler, mediator, listener3, listener1);
         } catch (Exception e) {
             System.out.printf("Caught exception: %s \n", e.getLocalizedMessage());
         }
+    }
+
+    private static void handShake(HandlerInterface handler, MediatorInterface mediator, AbstractListener listener1, AbstractListener listener2) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        ArrayList<String> result1 = listener1.toGreet(listener2.getClass().getName(), mediator, handler);
+        System.out.println(result1.get(0));
+        System.out.println(result1.get(1));
     }
 }
