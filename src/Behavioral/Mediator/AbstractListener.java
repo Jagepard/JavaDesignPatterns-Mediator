@@ -6,14 +6,15 @@
 package Behavioral.Mediator;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 public abstract class AbstractListener {
     /**
      * @param handler
      */
-    public void onEvent(HandlerInterface handler){
+    public String onEvent(HandlerInterface handler){
         handler.setMessage(this.getClass().getName() + ": Fine, thanks!");
-        System.out.printf("%s\n", handler.getMessage());
+        return handler.getMessage();
     }
 
     /**
@@ -23,9 +24,13 @@ public abstract class AbstractListener {
      * @throws NoSuchMethodException
      * @throws IllegalAccessException
      * @throws InvocationTargetException
+     * @return
      */
-    public void toGreet(String listenerName, MediatorInterface mediator, HandlerInterface handler) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        System.out.printf("%s: How are you %s?\n", this.getClass().getName(), listenerName);
-        mediator.notify(listenerName, handler);
+    public ArrayList<String> toGreet(String listenerName, MediatorInterface mediator, HandlerInterface handler) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        ArrayList<String> messages = new ArrayList<String>();
+        messages.add(String.format("%s: How are you %s?", this.getClass().getName(), listenerName));
+        messages.add(mediator.notify(listenerName, handler));
+
+        return messages;
     }
 }
