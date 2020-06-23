@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Mediator implements MediatorInterface {
     LinkedHashMap<String, AbstractListener> listeners = new LinkedHashMap<>();
-    LinkedHashMap<String, String> events = new LinkedHashMap<>();
+    LinkedHashMap<String, String> events              = new LinkedHashMap<>();
 
     @Override
     public void addListener(AbstractListener listener, String methodToCall) {
@@ -28,8 +28,9 @@ public class Mediator implements MediatorInterface {
     public String notify(String name, HandlerInterface handler) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         if (listeners.containsKey(name) && events.containsKey(name)) {
             AbstractListener listener = listeners.get(name);
-            String methodName = events.get(name);
-            Method method = listener.getClass().getMethod(methodName, HandlerInterface.class);
+            String methodName         = events.get(name);
+            Method method             = listener.getClass().getMethod(methodName, HandlerInterface.class);
+
             return (String) method.invoke(listener, handler);
         }
 
