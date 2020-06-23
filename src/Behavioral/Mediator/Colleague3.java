@@ -5,7 +5,5 @@
 
 package Behavioral.Mediator;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class Colleague3 extends AbstractListener {
 }
